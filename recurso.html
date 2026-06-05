@@ -1699,11 +1699,143 @@
   <div class="gen-wrap" id="vinetasGenerator"></div>
 </section>
 
+<!-- ══════════════════ ENTRADA DOCENTE AL FONDO ══════════════════ -->
+<section aria-labelledby="selector-docente-heading" class="selector-docente" id="selector-docente">
+  <div class="selector-docente-head">
+    <div>
+      <span class="selector-eyebrow">Entrada docente</span>
+      <h2 id="selector-docente-heading">Elige una ruta antes de abrir el fondo.</h2>
+      <p>El catálogo completo existe, pero no aparece de golpe. Primero se muestra una selección breve, defendible y usable en aula.</p>
+    </div>
+    <div class="catalog-mode-switch" role="group" aria-label="Modo de consulta del fondo">
+      <button type="button" class="catalog-mode-btn active" id="modeAulaBtn" data-action="setCatalogMode" data-arg="aula" aria-pressed="true">Modo aula</button>
+      <button type="button" class="catalog-mode-btn" id="modeBibliotecaBtn" data-action="setCatalogMode" data-arg="biblioteca" aria-pressed="false">Modo biblioteca</button>
+    </div>
+  </div>
+
+  <div class="docente-planner" aria-label="Selector docente de recomendación">
+    <label>
+      <span>Etapa</span>
+      <select id="docenteNivel">
+        <option value="primaria">Primaria</option>
+        <option value="secundaria" selected>Secundaria</option>
+        <option value="bachillerato">Bachillerato</option>
+        <option value="universidad">Universidad</option>
+      </select>
+    </label>
+    <label>
+      <span>Propósito</span>
+      <select id="docenteUso">
+        <option value="lenguas">Comprensión lectora</option>
+        <option value="historia">Contexto histórico</option>
+        <option value="ciencia">Ciencia / STEM</option>
+        <option value="emocional" selected>Educación emocional</option>
+          <option value="filosofia">Ética y pensamiento</option>
+          <option value="visual">Alfabetización visual</option>
+          <option value="yokai">Yōkai / folklore visual</option>
+          <option value="genero">Identidad y género</option>
+          <option value="inclusion">Inclusión</option>
+        </select>
+    </label>
+    <label>
+      <span>Tiempo</span>
+      <select id="docenteTiempo">
+        <option value="breve">15 minutos</option>
+        <option value="sesion" selected>1 sesión</option>
+        <option value="proyecto">Proyecto</option>
+      </select>
+    </label>
+    <label>
+      <span>Madurez del grupo</span>
+      <select id="docenteMadurez">
+        <option value="suave" selected>Sin contenido sensible</option>
+        <option value="media">Con mediación</option>
+        <option value="abierta">Abierta</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="docente-results-head">
+    <div>
+      <h3>Selección sugerida</h3>
+      <p id="docenteSummary">12 títulos como máximo, con criterio de uso didáctico.</p>
+    </div>
+    <button type="button" class="docente-secondary" data-action="setCatalogMode" data-arg="biblioteca">Abrir fondo completo</button>
+  </div>
+  <div class="docente-card-grid" id="docenteResults" aria-live="polite"></div>
+
+  <div class="rutas-docentes" aria-label="Rutas didácticas recomendadas">
+    <article class="ruta-card" data-ruta="primeros">
+      <figure class="ruta-media"><img src="img/gw-cartela.jpg" width="152" height="224" loading="lazy" alt="Detalle de cartela en estampa japonesa"></figure>
+      <span class="ruta-tag">Ruta 01</span>
+      <h3>Iniciar manga sin fricción</h3>
+      <p>Para grupos que no conocen el código visual o necesitan una entrada segura.</p>
+      <button type="button" data-action="applyDocenteRoute" data-arg="primeros">Ver 6 títulos</button>
+    </article>
+    <article class="ruta-card" data-ruta="memoria">
+      <figure class="ruta-media"><img src="img/kuniyoshi-esqueleto.jpg" width="1200" height="590" loading="lazy" alt="Tríptico ukiyo-e con esqueleto gigante de Kuniyoshi"></figure>
+      <span class="ruta-tag">Ruta 02</span>
+      <h3>Memoria, historia y conflicto</h3>
+      <p>Lecturas para situar el manga como documento cultural e histórico.</p>
+      <button type="button" data-action="applyDocenteRoute" data-arg="memoria">Ver 6 títulos</button>
+    </article>
+    <article class="ruta-card" data-ruta="cuerpo">
+      <figure class="ruta-media"><img src="img/gw-trama.jpg" width="430" height="300" loading="lazy" alt="Detalle de espuma y trama visual de la Gran Ola"></figure>
+      <span class="ruta-tag">Ruta 03</span>
+      <h3>Cuerpo, ciencia y cuidado</h3>
+      <p>Una vía para STEM, salud, biología y conversación ética.</p>
+      <button type="button" data-action="applyDocenteRoute" data-arg="cuerpo">Ver 6 títulos</button>
+    </article>
+    <article class="ruta-card" data-ruta="identidad">
+      <figure class="ruta-media"><img src="img/sharaku-actor.jpg" width="1200" height="1866" loading="lazy" alt="Retrato expresivo de actor kabuki por Sharaku"></figure>
+      <span class="ruta-tag">Ruta 04</span>
+      <h3>Identidad y adolescencia</h3>
+      <p>Títulos para tutoría, convivencia, género y lectura emocional.</p>
+      <button type="button" data-action="applyDocenteRoute" data-arg="identidad">Ver 6 títulos</button>
+    </article>
+    <article class="ruta-card" data-ruta="yokai">
+      <figure class="ruta-media"><img src="img/public-domain/sekiens-kodama.jpg" width="400" height="518" loading="lazy" alt="Kodama de Toriyama Sekien, yōkai asociado a los árboles"></figure>
+      <span class="ruta-tag">Ruta 05</span>
+      <h3>Yōkai y folklore visual</h3>
+      <p>Para conectar mitología japonesa, cultura popular y alfabetización visual.</p>
+      <button type="button" data-action="applyDocenteRoute" data-arg="yokai">Ver 6 títulos</button>
+    </article>
+  </div>
+
+  <div class="yokai-visual-band" aria-label="Láminas libres para trabajar yōkai y folklore visual">
+    <div class="yokai-copy">
+      <span class="selector-eyebrow">Láminas libres</span>
+      <h3>Del yōkai clásico al manga moderno.</h3>
+      <p>Dos imágenes de dominio público para abrir conversación: catálogo visual de criaturas, exageración expresiva y continuidad entre estampa, folklore y manga.</p>
+    </div>
+    <figure>
+      <img src="img/public-domain/sekiens-kodama.jpg" width="400" height="518" loading="lazy" alt="Kodama de Toriyama Sekien">
+      <figcaption>Toriyama Sekien · <i>Kodama</i>, de <i>Gazu Hyakki Yagyō</i> · dominio público.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/public-domain/kyosai-yokai.jpg" width="400" height="269" loading="lazy" alt="Imagen de yōkai por Kawanabe Kyōsai">
+      <figcaption>Kawanabe Kyōsai · imagen de yōkai · dominio público.</figcaption>
+    </figure>
+  </div>
+</section>
+
 <!-- ══════════════════ CATÁLOGO COMPLETO ══════════════════ -->
-<section aria-labelledby="catalogo-heading" class="catalog-section" id="catalogo">
+<section aria-labelledby="catalogo-heading" class="catalog-section catalog-collapsed" id="catalogo">
   <div class="catalog-header">
-    <h2 id="catalogo-heading" class="catalog-title">Catálogo completo del fondo</h2>
-    <p class="catalog-sub">279 títulos · Pasa el cursor sobre cada tarjeta para ver la descripción pedagógica · Los filtros de uso y nivel operan sobre este catálogo y la línea del tiempo simultáneamente · Busca por título, autor o tema libre</p>
+    <h2 id="catalogo-heading" class="catalog-title">Fondo completo en modo biblioteca</h2>
+    <p class="catalog-sub">279 títulos disponibles para consulta experta. En modo aula permanece oculto para evitar sobrecarga cognitiva.</p>
+  </div>
+
+  <div class="catalog-collapsed-banner">
+    <span class="ccb-eyebrow">Modo aula activo</span>
+    <h3 class="ccb-title">El fondo completo está cerrado por diseño.</h3>
+    <p class="ccb-body">Para trabajar didácticamente conviene empezar con una selección guiada. Abre el modo biblioteca solo cuando necesites búsqueda exhaustiva, exportación o gestión del fondo.</p>
+    <div class="ccb-tips">
+      <span class="ccb-tip"><span class="ccb-k">1</span> Elige etapa y propósito arriba</span>
+      <span class="ccb-tip"><span class="ccb-k">2</span> Usa una ruta didáctica</span>
+      <span class="ccb-tip"><span class="ccb-k">3</span> Abre el fondo completo si hace falta</span>
+    </div>
+    <button type="button" class="catalog-explore-btn" id="exploreBtn" data-action="setCatalogMode" data-arg="biblioteca">Abrir modo biblioteca</button>
   </div>
 
 <!-- ── USO RÁPIDO DOCENTE ───────────────────────────────── -->
