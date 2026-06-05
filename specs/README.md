@@ -50,7 +50,7 @@ Referencias a tests/specs/nombre.spec.js
 
 - [`features/01-portada.md`](./features/01-portada.md) — Landing cinematográfica
 - [`features/02-recurso-arquitectura.md`](./features/02-recurso-arquitectura.md) — Recurso principal: 4 partes coherentes con portada
-- [`features/03-catalogo.md`](./features/03-catalogo.md) — Catálogo curado de 279 títulos
+- [`features/03-catalogo.md`](./features/03-catalogo.md) — Catálogo curado de 283 títulos
 - [`features/04-url-state.md`](./features/04-url-state.md) — Estado del catálogo en URL
 - [`features/05-ficha-pdf.md`](./features/05-ficha-pdf.md) — Generador de ficha PDF por título
 - [`features/06-deck-claustro.md`](./features/06-deck-claustro.md) — Presentación de 8 slides
@@ -62,3 +62,4 @@ Referencias a tests/specs/nombre.spec.js
 - [`architecture/csp.md`](./architecture/csp.md) — Content Security Policy
 - [`architecture/accessibility.md`](./architecture/accessibility.md) — Accesibilidad y auditoría UX/UI
 - [`architecture/design-system.md`](./architecture/design-system.md) — Tipografía, color, layout
+- [`architecture/change-safety.md`](./architecture/change-safety.md) — Contratos, riesgos y protocolo de cambios seguros

@@ -10,7 +10,7 @@ El fondo Aula de Cómic tiene cientos de títulos. Para uso docente, la pregunta
 
 ## Solución
 
-279 títulos catalogados con metadatos pedagógicos. Cada entrada incluye:
+283 títulos catalogados con metadatos pedagógicos. Cada entrada incluye:
 
 ```js
 {
@@ -26,11 +26,11 @@ El fondo Aula de Cómic tiene cientos de títulos. Para uso docente, la pregunta
 
 **Filtros cruzados:** uso pedagógico (8 colores), nivel educativo (5 etapas), ODS (10 objetivos), búsqueda libre por título/autor/tema. Se aplican en simultáneo y todos persisten en la URL (ver `04-url-state.md`).
 
-**Modo colapsado por defecto:** el catálogo arranca oculto con un banner editorial sugiriendo búsquedas. Al pulsar "Ver los 279 títulos en cuadrícula" se expande.
+**Modo colapsado por defecto:** el catálogo arranca oculto con un banner editorial sugiriendo búsquedas. Al pulsar "Ver los 283 títulos en cuadrícula" se expande.
 
 ## Criterios de aceptación
 
-- [ ] El catálogo expone exactamente **279 entradas**.
+- [ ] El catálogo expone exactamente **283 entradas**.
 - [ ] Cada entrada tiene `titulo`, `autor`, `uso`, `nivel`, `color`, `tip` como mínimo.
 - [ ] Las acciones de cada tarjeta están en `<button>` con `data-action` (no inline handlers).
 - [ ] Los filtros `filterUso`, `filterNivel`, `filterOds` están en `window.*` y son re-llamables.
@@ -56,4 +56,4 @@ window.filterByEmocion(key)      // entrada por emoción/tema
 
 ## Tests asociados
 
-- `tests/specs/smoke.spec.js` → `el catálogo expone exactamente 279 entradas`
+- `tests/specs/smoke.spec.js` → `el catálogo expone exactamente 283 entradas`

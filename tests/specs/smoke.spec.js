@@ -56,14 +56,14 @@ for (const p of PAGES) {
 }
 
 test.describe('Recurso · invariantes del catálogo', () => {
-  test('el catálogo expone exactamente 279 entradas', async ({ page }) => {
+  test('el catálogo expone exactamente 283 entradas', async ({ page }) => {
     await page.goto('/recurso.html');
     // datos.js define un array global CATALOGO
     const n = await page.evaluate(() => {
       // @ts-ignore
       return Array.isArray(window.CATALOGO) ? window.CATALOGO.length : -1;
     });
-    expect(n, 'Catálogo no encontrado o cantidad cambió').toBe(279);
+    expect(n, 'Catálogo no encontrado o cantidad cambió').toBe(283);
   });
 
   test('las 4 partes de la portada existen en el DOM', async ({ page }) => {

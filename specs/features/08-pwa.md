@@ -6,7 +6,7 @@
 
 ## Problema
 
-Wi-Fi escolar es notoriamente inestable. Una docente que prepara una sesión en el aula no debería ver una página rota si se cae la conexión a mitad de proyección. Y el recurso entero (con 279 fichas, situaciones LOMLOE, glosario, manual) puede dejarse instalado en la tablet del centro como app autónoma.
+Wi-Fi escolar es notoriamente inestable. Una docente que prepara una sesión en el aula no debería ver una página rota si se cae la conexión a mitad de proyección. Y el recurso entero (con 283 fichas, situaciones LOMLOE, glosario, manual) puede dejarse instalado en la tablet del centro como app autónoma.
 
 ## Solución
 

@@ -6,7 +6,7 @@
 
 ## Problema
 
-Hay docentes que prefieren llevarse al aula una versión impresa del marco pedagógico (por qué, decálogo, protocolo, anatomía). El recurso interactivo no se imprime bien porque incluye filtros, modales, FABs, generadores y catálogo de 279 fichas.
+Hay docentes que prefieren llevarse al aula una versión impresa del marco pedagógico (por qué, decálogo, protocolo, anatomía). El recurso interactivo no se imprime bien porque incluye filtros, modales, FABs, generadores y catálogo de 283 fichas.
 
 ## Solución
 

@@ -22,7 +22,7 @@ Deck de 8 slides usando `<deck-stage>` (web component starter), cada slide a 192
 | 04 | Decálogo II — pautas 06-10                  |
 | 05 | Protocolo — antes / durante / después       |
 | 06 | Anatomía — koma, fukidashi, ma, RTL         |
-| 07 | El fondo — 279 títulos, 9 eras, datos clave |
+| 07 | El fondo — 283 títulos, 9 eras, datos clave |
 | 08 | Cierre — recurso + créditos                 |
 
 Cada slide tiene `data-screen-label` para identificarla en comentarios. Speaker notes en `<script type="application/json" id="speaker-notes">`.

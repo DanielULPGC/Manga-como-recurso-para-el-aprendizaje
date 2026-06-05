@@ -55,6 +55,27 @@ Caption / metadata:         0.7rem-0.78rem
 
 Barra de color de uso + título + autor + badges + niveles + ODS + acciones. Hover sube z-index local (no global).
 
+### `.selector-docente`
+
+Componente de decisión previa al catálogo completo. No es una portada ni una
+landing: reduce carga cognitiva antes de abrir las 283 fichas.
+
+Estructura estable:
+
+- cabecera con selector `Modo aula / Modo biblioteca`;
+- `.docente-method` con cuatro criterios de lectura docente;
+- `.docente-planner` con controles de etapa, propósito, tiempo y madurez;
+- `.docente-card-grid` con recomendaciones accionables;
+- `.rutas-docentes` con rutas cerradas.
+
+Contrato visual:
+
+- mantener los IDs `selector-docente`, `docenteResults`, `modeAulaBtn`,
+  `modeBibliotecaBtn`;
+- no convertir los controles en enlaces;
+- preservar tap targets >= 40 px;
+- cada tarjeta debe responder a: por qué, riesgo, actividad y alternativa.
+
 ### `.parte-divider`
 
 Block a tinta llena que separa las 4 PARTES del recurso. Featured (Parte II) usa rojo. Animaciones de entrada con IntersectionObserver.

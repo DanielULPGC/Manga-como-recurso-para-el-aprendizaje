@@ -1,6 +1,6 @@
 # Overview — Manga como recurso para el aula
 
-**Estado:** en producción · **Versión:** v5.34 · **Fecha:** mayo 2026
+**Estado:** en producción · **Versión:** v5.42 · **Fecha:** junio 2026
 
 ## Visión
 
@@ -9,7 +9,7 @@ Recurso interactivo para profesorado que convierte el fondo de manga del Aula de
 No es un catálogo bibliográfico. No es una guía de lectura. Es un **instrumento de planificación pedagógica** que combina:
 
 - **Marco**: por qué el manga funciona en el aula, cómo mediar la lectura.
-- **Fondo**: catálogo de 279 títulos con metadatos pedagógicos.
+- **Fondo**: catálogo de 283 títulos con metadatos pedagógicos.
 - **Aula**: situaciones LOMLOE listas, itinerarios por etapa, recorridos universitarios.
 
 ## Audiencia
@@ -38,7 +38,7 @@ Sitio web estático, mobile-first, PWA instalable. Cero backend, cero base de da
 - **`manual-docente.html`** — versión imprimible (manual de 5 láminas A4).
 - **`deck-claustro.html`** — presentación de 8 slides con `deck-stage.js`.
 
-Catálogo y lógica en `js/datos.js` (~2.000 líneas con 279 fichas) + `js/app.js` (~20.000 líneas con renderizado, modales, filtros, IA opcional).
+Catálogo y lógica en `js/datos.js` (~2.000 líneas con 283 fichas) + `js/app.js` (~20.000 líneas con renderizado, modales, filtros, IA opcional).
 
 ## Decisiones de fondo
 
@@ -55,7 +55,7 @@ Catálogo y lógica en `js/datos.js` (~2.000 líneas con 279 fichas) + `js/app.j
 
 - ✅ Auditoría UX/UI completa cerrada — **23/23 hallazgos resueltos** (ver `architecture/accessibility.md` y `site/revision-uxui.html`).
 - ✅ Portada cinematográfica en producción.
-- ✅ Catálogo de 279 títulos validado.
+- ✅ Catálogo de 283 títulos validado.
 - ✅ Tests de regresión Playwright (smoke + url-state + ficha-pdf).
 - ✅ PWA con service worker v5.34.
 

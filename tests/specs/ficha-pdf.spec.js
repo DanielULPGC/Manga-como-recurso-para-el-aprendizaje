@@ -30,8 +30,8 @@ test.describe('Ficha PDF · inyección de botón', () => {
     await waitForCatalog(page);
     const cards = await page.locator('.cat-card').count();
     const buttons = await page.locator('.cat-card .cat-pdf-btn').count();
-    expect(cards).toBe(279);
-    expect(buttons).toBe(279);
+    expect(cards).toBe(283);
+    expect(buttons).toBe(283);
   });
 
   test('el template #fichaPDFTemplate existe pero está oculto', async ({ page }) => {

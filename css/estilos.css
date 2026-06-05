@@ -72,6 +72,12 @@
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* ─── BODY — fixed paper grain ──────────── */
 body {
   background-color: var(--paper);
@@ -182,6 +188,10 @@ h1 em { color: var(--red); font-style: normal; }
 .scroll {
   overflow-x: auto;
   overflow-y: hidden;
+  box-sizing: border-box;
+  max-width: 100%;
+  contain: layout paint;
+  overscroll-behavior-x: contain;
   padding: 1.5rem 5rem 2.5rem;
   cursor: grab;
   user-select: none;
@@ -191,6 +201,9 @@ h1 em { color: var(--red); font-style: normal; }
 .scroll::-webkit-scrollbar { height: 5px; }
 .scroll::-webkit-scrollbar-track { background: var(--paper2); }
 .scroll::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+@media (max-width: 760px) {
+  .scroll { padding: 1rem 1rem 2rem; }
+}
 
 /* ─── TIMELINE TABLE ─────────────────────── */
 /*

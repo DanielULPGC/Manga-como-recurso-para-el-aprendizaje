@@ -10,7 +10,7 @@ El recurso necesita una **puerta de entrada institucional** que comunique en 5 s
 - Qué es (recurso didáctico sobre manga).
 - Quién lo hace (Aula de Cómic · ULPGC).
 - Por dónde entrar (cuatro caminos según rol y etapa).
-- Qué tamaño tiene (279 títulos, 9 eras, 5 niveles).
+- Qué tamaño tiene (283 títulos, 9 eras, 5 niveles).
 
 La portada original integrada en `recurso.html` ocupaba 3.772 px (≈ 7 viewports móviles) antes del primer contenido. Demasiado ruido y demasiada altura.
 
@@ -25,7 +25,7 @@ Nueva portada standalone (`index.html`) con estética cinematográfica adaptada 
 - Tipografía editorial (Shippori Mincho · Cinzel · JetBrains · Noto Serif JP).
 
 **Secciones:**
-1. **Hero** — vídeo CSS multicapa (Ken Burns sobre banner ULPGC + tinte rojo + Hokusai waves + grain + partículas doradas) + título palabra-por-palabra con blur-in + stat cards (279/9/5) + nav fija.
+1. **Hero** — vídeo CSS multicapa (Ken Burns sobre banner ULPGC + tinte rojo + Hokusai waves + grain + partículas doradas) + título palabra-por-palabra con blur-in + stat cards (283/9/5) + nav fija.
 2. **4 caminos** — glass cards apuntando a `recurso.html#parte-i .. iv`.
 3. **3 capabilities** — Línea del tiempo · Catálogo · Situaciones LOMLOE.
 4. **CTA final + créditos institucionales** con segundo fondo en tinte oro.
@@ -35,7 +35,7 @@ Nueva portada standalone (`index.html`) con estética cinematográfica adaptada 
 - [ ] La portada renderiza la app React (no se queda en blanco).
 - [ ] Los 4 path-cards apuntan exactamente a `recurso.html#parte-i`, `…#parte-ii`, `…#parte-iii`, `…#parte-iv`.
 - [ ] El logo 漫 en la nav lleva a `#top` (anchor).
-- [ ] Stats card muestra `279`, `9`, `5` correctamente.
+- [ ] Stats card muestra `283`, `9`, `5` correctamente.
 - [ ] Mobile: el nav colapsa, mantiene logo + botón Entrar.
 - [ ] Sin errores de consola al cargar.
 

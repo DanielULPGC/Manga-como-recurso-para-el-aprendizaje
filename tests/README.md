@@ -7,7 +7,7 @@ Suite Playwright para el recurso *Manga como recurso para el aula* · ULPGC.
 **`specs/smoke.spec.js`** — Smoke tests para cada página principal:
 - Carga sin errores de consola
 - Estructura semántica básica (`<h1>`, `<title>`, `viewport`)
-- Invariantes del catálogo (279 entradas, 4 dividers de partes, secciones con `aria-labelledby`, anchors no rotos)
+- Invariantes del catálogo (283 entradas, 4 dividers de partes, secciones con `aria-labelledby`, anchors no rotos)
 - Portada cinematográfica (no se queda en blanco, links a `#parte-i..iv`)
 - Deck claustro (8 slides)
 
@@ -20,12 +20,19 @@ Suite Playwright para el recurso *Manga como recurso para el aula* · ULPGC.
 - API pública `window.__urlState.{read,write,apply}`
 
 **`specs/ficha-pdf.spec.js`** — Tests del feature *Ficha PDF por título*:
-- Botón ↓ Ficha PDF inyectado en cada una de las 279 tarjetas
+- Botón ↓ Ficha PDF inyectado en cada una de las 283 tarjetas
 - Template `#fichaPDFTemplate` existe pero oculto por defecto
 - `window.printFichaPDF(titulo)` puebla el template y llama a `print()`
 - El template incluye título, autor, descripción, badges, niveles, ODS y OPAC
 - Click en el botón de una tarjeta puebla con los datos correctos
 - 3 sugerencias de aula adaptadas al uso pedagógico
+
+**`specs/catalog-contract.spec.js`** — Contratos de producción del catálogo y selector docente:
+- 283 fichas con títulos exactos no duplicados
+- Campos mínimos, OPAC ULPGC, ODS y color válidos
+- Coherencia `uso`/`badges` y `nivel`/`niveles`
+- 59 fichas sensibles con `sens_label` y sin Infantil/Primaria
+- Selector docente en modo aula, rutas cerradas y modo biblioteca accesible
 
 ## Instalación (una sola vez)
 
@@ -75,8 +82,9 @@ node serve.mjs           # PORT=4174 node serve.mjs para otro puerto
 
 ## Mantenimiento
 
-- Cuando añadas títulos a `datos.js`, actualiza el invariante de 279 en
-  `smoke.spec.js` y la spec `specs/features/03-catalogo.md`.
+- Cuando añadas títulos a `datos.js`, actualiza el invariante de 283 en
+  `smoke.spec.js`, `catalog-contract.spec.js` y la spec
+  `specs/features/03-catalogo.md`.
 - Cuando añadas un nuevo `<section id="x">`, añádelo a la lista
   `targets` del test `secciones clave son <section>` y a la spec
   `specs/features/02-recurso-arquitectura.md`.

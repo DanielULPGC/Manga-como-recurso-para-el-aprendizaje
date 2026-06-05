@@ -50,7 +50,7 @@ Botón "↓ Ficha PDF" en cada `.cat-card-actions`. Al pulsarlo, popula un templ
 
 ## Criterios de aceptación
 
-- [ ] El botón ↓ Ficha PDF se inyecta en **cada una de las 279 tarjetas**.
+- [ ] El botón ↓ Ficha PDF se inyecta en **cada una de las 283 tarjetas**.
 - [ ] El template `#fichaPDFTemplate` existe en el DOM y está oculto por defecto.
 - [ ] `window.printFichaPDF('Título exacto')` puebla el template y llama a `window.print()`.
 - [ ] Tras `printFichaPDF`, el template contiene: título, autor, período, descripción no vacía.
@@ -75,7 +75,7 @@ window.printFichaPDF(titulo)   // dispara el flujo desde JS (testable)
 ## Tests asociados
 
 - `tests/specs/ficha-pdf.spec.js` (6 tests):
-  - inyección de botón en 279 tarjetas
+  - inyección de botón en 283 tarjetas
   - template oculto por defecto
   - `printFichaPDF` puebla y llama print
   - badges + niveles + ODS

@@ -3036,8 +3036,8 @@ function searchCatalog(q) {
       card.classList.add('search-match');
       visible++;
       if (!firstMatch) firstMatch = card;
-      if (titleEl)  titleEl.innerHTML  = _highlight(titleEl.textContent, words);
-      if (authorEl) authorEl.innerHTML = _highlight(authorEl.textContent, words);
+      if (titleEl)  _highlightInto(titleEl, words);
+      if (authorEl) _highlightInto(authorEl, words);
       // Show tip in list mode
       if (tip) {
         const tipEl = document.createElement('span');
@@ -3070,22 +3070,56 @@ function searchCatalog(q) {
   }
 }
 
-function _highlight(text, words) {
-  let result = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  words.forEach(w => {
-    const rx = new RegExp('(' + w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
-    result = result.replace(rx, '<mark class="search-hl">$1</mark>');
+function _highlightInto(element, words) {
+  if (!element) return;
+
+  const source = element.dataset.searchText || element.textContent || '';
+  element.dataset.searchText = source;
+  element.textContent = '';
+
+  const uniqueWords = Array.from(new Set(words.filter(Boolean)))
+    .map(w => w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
+
+  if (!uniqueWords.length) {
+    element.textContent = source;
+    return;
+  }
+
+  const rx = new RegExp('(' + uniqueWords.join('|') + ')', 'gi');
+  let lastIndex = 0;
+
+  source.replace(rx, (match, _group, offset) => {
+    if (offset > lastIndex) {
+      element.appendChild(document.createTextNode(source.slice(lastIndex, offset)));
+    }
+    const mark = document.createElement('mark');
+    mark.className = 'search-hl';
+    mark.textContent = match;
+    element.appendChild(mark);
+    lastIndex = offset + match.length;
+    return match;
   });
-  return result;
+
+  if (lastIndex < source.length) {
+    element.appendChild(document.createTextNode(source.slice(lastIndex)));
+  }
 }
 
 function _restoreText(card) {
   const titleEl  = card.querySelector('.cat-title');
   const authorEl = card.querySelector('.cat-author');
-  if (titleEl?.querySelector('.search-hl'))
+  if (titleEl?.dataset.searchText) {
+    titleEl.textContent = titleEl.dataset.searchText;
+    delete titleEl.dataset.searchText;
+  } else if (titleEl?.querySelector('.search-hl')) {
     titleEl.textContent = titleEl.textContent;
-  if (authorEl?.querySelector('.search-hl'))
+  }
+  if (authorEl?.dataset.searchText) {
+    authorEl.textContent = authorEl.dataset.searchText;
+    delete authorEl.dataset.searchText;
+  } else if (authorEl?.querySelector('.search-hl')) {
     authorEl.textContent = authorEl.textContent;
+  }
 }
 
 function clearSearch() {
@@ -5605,7 +5639,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ── HISTORIA ─────────────────────────────────────────────
     'Adolf':                             [16,10], // WWII, derechos humanos
-    'Okinawa':                           [16,3],  // guerra, trauma
+    'Okinawa, el viento habla':          [16,3],  // guerra, trauma civil
     'Vinland Saga':                      [16,11], // guerra medieval, comunidad
     'Vagabond':                          [16,4],  // samurái, aprendizaje
     'Thermae Romae':                     [11,4],  // ciudad romana, cultura
@@ -5652,7 +5686,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // ── EDUCACIÓN EMOCIONAL ───────────────────────────────────
     'Solanin : Integral':                [3,10],  // salud mental, juventud
     'Tengo cáncer terminal, pero estoy bien': [3,10],
+    'Tengo cáncer terminal, pero estoy bien : una dibujante de manga erótico de 38 años con cáncer de colon': [3,10],
     'Hirayasumi':                        [3,11],  // bienestar, comunidad
+    'La calma después de la tormenta':   [3,10],  // duelo, amistad
     'After School Dice Club':            [4,10],  // educación, inclusión
     'La pequeña forastera : Siúil, a Rún': [10,4],
     'Amor es cuando cesa la lluvia':     [3,5],   // bienestar, relaciones
@@ -5673,6 +5709,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ── GÉNERO E IDENTIDAD ────────────────────────────────────
     'Sailor Moon':                       [5,10],  // género, igualdad
+    'Pretty Guardian Sailor Moon':       [5,10],  // género, igualdad
     'Skip and Loafer':                   [5,10],  // identidad, inclusión
     'Nana':                              [5,3],   // género, salud emocional
     'Yona : Princesa del Amanecer':      [5,16],  // género, poder
@@ -5681,7 +5718,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'Ruri la tatuadora : y otras historias de chicas malas.': [5,10],
     'Una mujer y la guerra':             [5,16],  // género, conflicto
     'Una mujer de la era Shôwa':         [5,16],  // género, historia
-    'Makanai: la cocina de las maiko':   [5,11],  // género, tradición
+    'Makanai : la cocinera de las maiko':[5,11],  // género, tradición
     'Pokémon y feminismo : la gran revolución transmedia': [5,4],
     'Anna Karenina: el manga':           [5,16],  // género, literatura
     'Orgullo y prejuicio':               [5,16],  // género, sociedad
@@ -5695,9 +5732,11 @@ document.addEventListener('DOMContentLoaded', function() {
     'Romeo y Julieta.':                  [3,16],
     'La metamorfosis : el manga':        [3,16],  // alienación, identidad
     'Ilíada y Odisea : el manga':        [16,4],  // guerra, educación clásica
+    'En este rincón del mundo':          [16,3],  // guerra, memoria civil
 
     // ── ALFABETIZACIÓN VISUAL ────────────────────────────────
     'Gon':                               [15,4],  // naturaleza, sin texto
+    'A silent voice':                    [10,3],  // inclusión, salud mental
     'Uzumaki : espiral':                 [3,16],  // horror, cuerpo
     'Atelier of witch hat = El atelier de sombreros de mago': [4,5],
     'El bosque milenario':               [15,3],  // naturaleza, salud
@@ -6177,7 +6216,7 @@ if (typeof filterNivel === 'function') {
 
 /* ══════════════════════════════════════════════════════════════
    RENDERIZADO DEL CATÁLOGO
-   Genera dinámicamente las 279 tarjetas desde CATALOGO[]
+   Genera dinámicamente las 283 tarjetas desde CATALOGO[]
 ════════════════════════════════════════════════════════════════ */
 
 /* ── Colores ODS (definidos antes de renderCatalog) ── */
@@ -6727,7 +6766,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /* ══════════════════════════════════════════════════════════════
    BÚSQUEDA GLOBAL — v6.0
    Busca simultáneamente en:
-     · Catálogo (279 títulos)
+     · Catálogo (283 títulos)
      · Línea del tiempo (.card)
      · Itinerarios (.itin-card)
      · Situaciones de Aprendizaje (.sa-card)
@@ -7254,7 +7293,7 @@ function _esc(s) {
 // Runs after renderCatalog() populates the DOM
 function hookCatCardClicks() {
   /* ── Event delegation: un único listener en #catGrid ──────────
-     Ventajas frente a 279 listeners individuales:
+     Ventajas frente a 283 listeners individuales:
        · Funciona aunque se añadan/reemplacen tarjetas dinámicamente
        · Consume mucha menos memoria
        · No requiere ser llamado de nuevo si el catálogo se re-renderiza
@@ -8002,7 +8041,7 @@ AVISO EU AI Act: Eres un sistema de IA generativa. El docente debe revisar y val
     if (online) {
       _addMsg('assistant', '¡Hola! Soy el asistente pedagógico IA de la **Biblioteca del Campus del Obelisco**. Puedo ayudarte a encontrar títulos del fondo manga, diseñar actividades y conectar con el currículo LOMLOE.\n\n*Recuerda revisar cualquier contenido generado antes de llevarlo al aula.*');
     } else {
-      _addMsg('assistant', '📡 **Modo sin conexión** — Puedo consultar el catálogo local (279 títulos) aunque no tengo acceso a la IA generativa.\n\nPrueba preguntas como:\n• «Busco manga para secundaria»\n• «Títulos de ciencia y tecnología»\n• «Manga conectado con ODS 4»\n\n*Cuando recuperes la conexión, tendré acceso completo a las funciones de IA.*');
+      _addMsg('assistant', '📡 **Modo sin conexión** — Puedo consultar el catálogo local (283 títulos) aunque no tengo acceso a la IA generativa.\n\nPrueba preguntas como:\n• «Busco manga para secundaria»\n• «Títulos de ciencia y tecnología»\n• «Manga conectado con ODS 4»\n\n*Cuando recuperes la conexión, tendré acceso completo a las funciones de IA.*');
     }
 
     // Quick suggestions adaptadas al estado de red
@@ -8954,6 +8993,10 @@ const LECTURA_ALIAS = {
   'a silent voice'                                             : 'A Silent Voice',
   'march comes in like a lion'                                 : 'March Comes in Like a Lion',
   'makanai  la cocina de las maiko'                            : 'Makanai',
+  'makanai  la cocinera de las maiko'                          : 'Makanai',
+  'pretty guardian sailor moon'                                : 'Sailor Moon',
+  'okinawa el viento habla'                                    : 'Okinawa',
+  'tengo cancer terminal pero estoy bien una dibujante de manga erotico de 38 anos con cancer de colon': 'Tengo cáncer terminal, pero estoy bien',
   // ── Ediciones múltiples → misma ficha ────────────────────────────
   'ayako 1'                                                    : 'Ayako',
   'ayako 2'                                                    : 'Ayako',
@@ -12902,7 +12945,7 @@ const LECTURA_TITULOS = {
    v1.0 · El manga como recurso didáctico · ULPGC
 
    Problema resuelto:
-     267 de los 279 títulos del fondo tienen fichas de lectura específicas
+     267 de los 283 títulos del fondo tienen fichas de lectura específicas
      (LECTURA_TITULOS). Los 41 restantes caen al fallback genérico
      (LECTURA_TEMPLATES), que sirve las mismas preguntas para cualquier obra.
 

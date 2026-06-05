@@ -926,7 +926,7 @@
   font-size: 0.85rem;
 }
 
-/* Botón "Ver los 279 títulos" — más editorial */
+/* Botón "Ver los 283 títulos" — más editorial */
 .catalog-section .catalog-explore-btn {
   display: block !important;
   margin: 1.6rem auto 0 !important;
@@ -3367,6 +3367,46 @@ button.gen-panel {
   gap: .75rem;
   margin: 1rem 0;
 }
+.docente-method {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 1.15rem 0 1rem;
+  border-top: 1px solid rgba(92, 62, 26, .22);
+  border-bottom: 1px solid rgba(92, 62, 26, .16);
+  padding: .85rem 0;
+}
+.docente-method div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: .65rem;
+  row-gap: .15rem;
+  align-content: start;
+  min-width: 0;
+}
+.docente-method span {
+  grid-row: 1 / 3;
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(92, 62, 26, .24);
+  background: rgba(255,255,255,.58);
+  color: #8b1a1a;
+  font: 800 .72rem/1 Inter, sans-serif;
+}
+.docente-method strong {
+  color: #24180d;
+  font: 800 .8rem/1.15 Inter, sans-serif;
+  text-transform: uppercase;
+}
+.docente-method p {
+  margin: 0;
+  max-width: 34ch;
+  color: rgba(38,26,16,.72);
+  font-size: .84rem;
+  line-height: 1.38;
+}
 .docente-planner label {
   display: grid;
   gap: .35rem;
@@ -3382,6 +3422,7 @@ button.gen-panel {
   color: #24180d;
   padding: 0 .75rem;
   font: 600 .92rem/1.2 Inter, sans-serif;
+  border-radius: 6px;
 }
 .docente-results-head {
   display: flex;
@@ -3414,6 +3455,8 @@ button.gen-panel {
   border-top: .32rem solid var(--docente-color, #7a5a0a);
   background: rgba(255,255,255,.8);
   padding: .85rem;
+  border-radius: 7px;
+  overflow: hidden;
   box-shadow: 0 10px 24px rgba(48,33,12,.07);
 }
 .docente-plate {
@@ -3444,6 +3487,7 @@ button.gen-panel {
   font-size: 1.18rem;
   line-height: 1.12;
   color: #24180d;
+  min-height: 2.65em;
 }
 .docente-autor {
   min-height: 2.2rem;
@@ -3480,6 +3524,10 @@ button.gen-panel {
   color: rgba(38,26,16,.74);
   font-size: .82rem;
   line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .docente-actions {
   display: flex;
@@ -3504,6 +3552,8 @@ button.gen-panel {
   display: flex;
   flex-direction: column;
   min-height: 23rem;
+  border-radius: 7px;
+  overflow: hidden;
   box-shadow: 0 8px 22px rgba(48,33,12,.06);
 }
 .ruta-media {
@@ -3629,6 +3679,7 @@ button.gen-panel {
 
 @media (max-width: 960px) {
   .selector-docente-head,
+  .docente-method,
   .docente-planner,
   .docente-card-grid,
   .rutas-docentes,
@@ -3642,6 +3693,7 @@ button.gen-panel {
 }
 @media (max-width: 640px) {
   .selector-docente-head,
+  .docente-method,
   .docente-planner,
   .docente-card-grid,
   .rutas-docentes,
