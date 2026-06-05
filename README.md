@@ -15,7 +15,7 @@ proyecto/
 │   └── htm-app.js      ← React + htm (sin Babel) — portada cinematográfica
 ├── js/
 │   ├── app.js          ← Lógica principal (~20.000 líneas)
-│   └── datos.js        ← Catálogo de 279 títulos
+│   └── datos.js        ← Catálogo de 283 títulos
 ├── css/
 │   └── estilos.css     ← Estilos (~7.600 líneas)
 └── icons/
@@ -57,7 +57,7 @@ Para desactivar: `localStorage.removeItem('manga_debug')` + recargar.
 | P1–P3  | SW sincronizado · SafeStorage · PWA manifest |
 | P4–P5  | Logger DEBUG · Sanitización XSS |
 | P6–P7  | @media print · Dark mode completo |
-| P8–P10 | Quiz 279 títulos · Exportación docente · Accesibilidad D3 |
+| P8–P10 | Quiz 283 títulos · Exportación docente · Accesibilidad D3 |
 | P11–P16 | Seguridad · Trampa de foco · Virtual scrolling · Backoff IA · CSP · Event delegation |
-| P17–P22 | Lectura guiada 279 títulos · Historial persistente · QR pasaporte · Panel docente · Offline IA · URLs cortas |
+| P17–P22 | Lectura guiada 283 títulos · Historial persistente · QR pasaporte · Panel docente · Offline IA · URLs cortas |
 | P23–P26 | Editor catálogo · Importador CSV/JSON · Validador esquema · Notificador novedades |

@@ -287,8 +287,8 @@ ul.compact li{margin:4px 0;line-height:1.55}
         <div>
           <h3>1.675 botones en una página HTML.</h3>
           <div class="where">document</div>
-          <p>Aun siendo un recurso con catálogo de 279 títulos y múltiples filtros, 1.675 botones implica que muchos podrían ser <code>&lt;a&gt;</code> (los que solo navegan) o que hay duplicaciones (ej. un mismo título con botón de info, de añadir a comparativa, etc., × 279 títulos × 6 acciones = ~1.700). Impacto real: bundle JS pesado y semántica imprecisa.</p>
-          <div class="fix"><strong>Verificado — falso positivo</strong>Tras auditar el HTML estático, solo un <code>&lt;button&gt;</code> hacía navegación pura (<code>scrollToSc</code> dentro del speed dial), y ya estaba oculto por left-dock.js. Los ≊1.674 restantes son rendered por <code>app.js</code> para catálogo (279 títulos × 6 acciones aprox.) y todos mutan estado (abrir ficha, abrir quiz, añadir a comparativa, generar rúbrica, etc.) — son semánticamente correctos. Los enlaces externos al OPAC dentro de fichas sí son <code>&lt;a&gt;</code>. Resuelto como ya conforme.</div>
+          <p>Aun siendo un recurso con catálogo de 283 títulos y múltiples filtros, 1.700 botones implica que muchos podrían ser <code>&lt;a&gt;</code> (los que solo navegan) o que hay duplicaciones (ej. un mismo título con botón de info, de añadir a comparativa, etc., × 283 títulos × 6 acciones = ~1.700). Impacto real: bundle JS pesado y semántica imprecisa.</p>
+          <div class="fix"><strong>Verificado — falso positivo</strong>Tras auditar el HTML estático, solo un <code>&lt;button&gt;</code> hacía navegación pura (<code>scrollToSc</code> dentro del speed dial), y ya estaba oculto por left-dock.js. Los ≊1.698 restantes son rendered por <code>app.js</code> para catálogo (283 títulos × 6 acciones aprox.) y todos mutan estado (abrir ficha, abrir quiz, añadir a comparativa, generar rúbrica, etc.) — son semánticamente correctos. Los enlaces externos al OPAC dentro de fichas sí son <code>&lt;a&gt;</code>. Resuelto como ya conforme.</div>
         </div>
       </div>
 

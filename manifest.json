@@ -3,7 +3,7 @@
 
   "name": "Las eras de Japón y el manga — Biblioteca ULPGC",
   "short_name": "Manga ULPGC",
-  "description": "Línea del tiempo interactiva, catálogo pedagógico de 279 títulos, situaciones de aprendizaje LOMLOE e itinerarios didácticos para Educación Infantil, Primaria, Secundaria y Bachillerato. Biblioteca del Campus del Obelisco · Aula de Cómic · ULPGC.",
+  "description": "Línea del tiempo interactiva, catálogo pedagógico de 283 títulos, situaciones de aprendizaje LOMLOE e itinerarios didácticos para Educación Infantil, Primaria, Secundaria y Bachillerato. Biblioteca del Campus del Obelisco · Aula de Cómic · ULPGC.",
 
   "start_url": "./",
   "scope": "./",
@@ -47,7 +47,7 @@
     {
       "name": "Catálogo de títulos",
       "short_name": "Catálogo",
-      "description": "Accede al catálogo completo de 279 títulos del fondo",
+      "description": "Accede al catálogo completo de 283 títulos del fondo",
       "url": "./#catalogo",
       "icons": [{ "src": "./icons/icon.svg", "sizes": "any" }]
     },
