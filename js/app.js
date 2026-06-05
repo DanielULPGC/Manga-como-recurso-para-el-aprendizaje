@@ -5777,11 +5777,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Auto-expand catalog if collapsed
     if (isActive) {
       const sec = document.getElementById('catalogo');
-      const btn = document.getElementById('exploreBtn');
       if (sec?.classList.contains('catalog-collapsed')) {
-        sec.classList.remove('catalog-collapsed');
-        if (btn) { btn.textContent = 'Ocultar todos los títulos ↑'; btn.classList.add('expanded'); }
-        catalogExpanded = true;
+        setCatalogMode('biblioteca');
       }
     }
   };
@@ -5941,22 +5938,204 @@ document.addEventListener('DOMContentLoaded', function() {
 
 })();
 
+// ══ SELECTOR DOCENTE — entrada didáctica al fondo ═══════════
+var catalogExpanded = false;
+const DOCENTE_RUTAS = {
+  primeros: {
+    label: 'Iniciar manga sin fricción',
+    titles: ['Yotsuba!', 'El ratón de biblioteca', 'Mascotas', 'La pequeña forastera', '¡Kota, ven!', 'Astroboy'],
+    note: 'Selección suave para leer el código visual antes de entrar en obras densas.'
+  },
+  memoria: {
+    label: 'Memoria, historia y conflicto',
+    titles: ['Autobiografía', 'Vagabond', 'Vinland Saga', 'La época de Botchan', 'Kanikosen', 'Adolf'],
+    note: 'Para conectar contexto histórico, punto de vista y conversación ética.'
+  },
+  cuerpo: {
+    label: 'Cuerpo, ciencia y cuidado',
+    titles: ['Team medical dragon', 'Black Jack', 'Astroboy', 'Pluto', 'Planetes :integral', 'The ghost in the shell'],
+    note: 'Una vía STEM que permite hablar de cuerpo, tecnología y responsabilidad.'
+  },
+  identidad: {
+    label: 'Identidad y adolescencia',
+    titles: ['La pequeña forastera', 'El gourmet solitario', 'Cielos radiantes', 'Ranma 1', 'Family Compo', 'Nana'],
+    note: 'Lecturas para tutoría, identidad, convivencia y alfabetización emocional.'
+  },
+  yokai: {
+    label: 'Yōkai y folklore visual',
+    titles: ['Kitaro', 'Dentro de los yokais.', 'Dororon Enma-Kun', 'Dororo', 'Cuentos de un pasado lejano : konjaku monogatari', 'El zorro y el pequeño tanuki'],
+    note: 'Para observar cómo la criatura tradicional pasa de la estampa y el relato oral al manga contemporáneo.'
+  }
+};
+
+const DOCENTE_USO_LABELS = {
+  historia: 'Contexto histórico',
+  filosofia: 'Ética y pensamiento',
+  emocional: 'Educación emocional',
+  lenguas: 'Comprensión lectora',
+  inclusion: 'Inclusión',
+  visual: 'Alfabetización visual',
+  ciencia: 'Ciencia / STEM',
+  genero: 'Identidad y género',
+  yokai: 'Yōkai / folklore visual'
+};
+
+const DOCENTE_ACTIVIDADES = {
+  historia: 'Sitúa la obra en una línea temporal y pide una evidencia visual de época.',
+  filosofia: 'Formula un dilema ético en dos columnas: decisión del personaje y alternativa.',
+  emocional: 'Elige una viñeta emocional y escribe qué se ve, qué se infiere y qué se calla.',
+  lenguas: 'Compara una página con un texto breve: narrador, elipsis y ritmo.',
+  inclusion: 'Identifica barreras del entorno y reescribe una escena desde otra perspectiva.',
+  visual: 'Analiza encuadre, calle, onomatopeya y dirección de lectura en una página.',
+  ciencia: 'Extrae concepto, analogía visual y límite científico de la representación.',
+  genero: 'Mapea cómo se construye identidad: cuerpo, voz, mirada social y conflicto.',
+  yokai: 'Compara criatura, gesto y función narrativa: qué miedo ordena, qué norma social revela y cómo pasa al manga.'
+};
+
+const DOCENTE_VISUALS = {
+  historia: { src: 'img/kuniyoshi-esqueleto.jpg', alt: 'Composición dramática de Kuniyoshi para trabajar historia y escala visual' },
+  filosofia: { src: 'img/gw-fuji.jpg', alt: 'Detalle del monte Fuji bajo la ola para trabajar escala, silencio y pensamiento' },
+  emocional: { src: 'img/hiroshige-lluvia.jpg', alt: 'Lluvia de Hiroshige para trabajar atmósfera y emoción visual' },
+  lenguas: { src: 'img/gw-cartela.jpg', alt: 'Cartela integrada en la imagen para trabajar texto y viñeta' },
+  inclusion: { src: 'img/gw-barca.jpg', alt: 'Detalle de barca y punto de vista para trabajar mirada e inclusión' },
+  visual: { src: 'img/hokusai-gran-ola.jpg', alt: 'La Gran Ola de Hokusai como entrada a la alfabetización visual' },
+  ciencia: { src: 'img/gw-trama.jpg', alt: 'Detalle de textura y trama para conectar observación y representación' },
+  genero: { src: 'img/sharaku-actor.jpg', alt: 'Retrato expresivo de Sharaku para trabajar cuerpo, gesto e identidad' },
+  yokai: { src: 'img/public-domain/kyosai-yokai.jpg', alt: 'Yōkai de Kawanabe Kyōsai para trabajar folklore visual y continuidad con el manga' }
+};
+
+function _docenteCatalog() {
+  return (typeof CATALOGO_EFECTIVO !== 'undefined' && CATALOGO_EFECTIVO.length)
+    ? CATALOGO_EFECTIVO
+    : (typeof CATALOGO !== 'undefined' ? CATALOGO : []);
+}
+
+function _docenteFind(title) {
+  const q = String(title || '').toLowerCase();
+  return _docenteCatalog().find(t => String(t.titulo || '').toLowerCase() === q)
+    || _docenteCatalog().find(t => String(t.titulo || '').toLowerCase().includes(q));
+}
+
+function _docenteLevel(entry) {
+  return entry?.nivel || (entry?.niveles || []).join(' ') || '';
+}
+
+function _docenteIsYokai(entry) {
+  const hay = `${entry?.titulo || ''} ${entry?.autor || ''} ${entry?.periodo || ''} ${entry?.tip || ''}`.toLowerCase();
+  return /yokai|yōkai|folklore|sobrenatural|demon|demonio|tanuki|kitaro|dororo|konjaku|esp[ií]ritu/.test(hay);
+}
+
+function _docenteRisk(entry) {
+  if (entry?.sensitive) return entry.sens_label || 'Requiere mediación previa.';
+  const nivel = _docenteLevel(entry);
+  if (/bachillerato|universidad/.test(nivel)) return 'Puede requerir contexto y lectura acompañada.';
+  return 'Entrada suave: revisar igualmente el tomo completo antes de aula.';
+}
+
+function _docenteAlternative(entry) {
+  const catalog = _docenteCatalog();
+  const uso = String(entry?.uso || '').split(' ')[0];
+  const alt = catalog.find(t => t.titulo !== entry?.titulo && !t.sensitive && String(t.uso || '').includes(uso));
+  return alt?.titulo || 'Yotsuba!';
+}
+
+function _docenteCard(entry, forcedUso) {
+  if (!entry) return '';
+  const uso = forcedUso || String(entry.uso || '').split(' ')[0] || 'visual';
+  const nivel = _docenteLevel(entry) || 'secundaria';
+  const visual = DOCENTE_VISUALS[uso] || DOCENTE_VISUALS.visual;
+  const badges = (entry.badges || []).slice(0, 2).map(b => `<span>${escapeHtml(b)}</span>`).join('');
+  return `<article class="docente-card" style="--docente-color:${escapeHtml(entry.color || '#7a5a0a')}">
+    <figure class="docente-plate"><img src="${escapeHtml(visual.src)}" loading="lazy" alt="${escapeHtml(visual.alt)}"></figure>
+    <div class="docente-card-top">
+      <span class="docente-uso">${escapeHtml(DOCENTE_USO_LABELS[uso] || uso)}</span>
+      <span class="docente-nivel">${escapeHtml(nivel.replace(/\s+/g, ' · '))}</span>
+    </div>
+    <h4>${escapeHtml(entry.titulo || '')}</h4>
+    <p class="docente-autor">${escapeHtml(entry.autor || '')}</p>
+    <div class="docente-badges">${badges}</div>
+    <dl class="decision-list">
+      <div><dt>Por qué</dt><dd>${escapeHtml(entry.tip || 'Título útil para activar lectura visual y conversación guiada.').slice(0, 180)}</dd></div>
+      <div><dt>Riesgo</dt><dd>${escapeHtml(_docenteRisk(entry))}</dd></div>
+      <div><dt>Actividad</dt><dd>${escapeHtml(DOCENTE_ACTIVIDADES[uso] || DOCENTE_ACTIVIDADES.visual)}</dd></div>
+      <div><dt>Alternativa</dt><dd>${escapeHtml(_docenteAlternative(entry))}</dd></div>
+    </dl>
+    <div class="docente-actions">
+      <button type="button" data-action="openLecturaFor" data-arg="${escapeHtml(entry.titulo || '')}" data-arg2="${escapeHtml(uso)}" data-arg3="${escapeHtml(nivel)}">Lectura guiada</button>
+      <button type="button" data-action="filterByTitle" data-arg="${escapeHtml(entry.titulo || '')}">Localizar</button>
+    </div>
+  </article>`;
+}
+
+function renderDocenteSelector() {
+  const box = document.getElementById('docenteResults');
+  if (!box) return;
+  const catalog = _docenteCatalog();
+  if (!catalog.length) return;
+  const nivel = document.getElementById('docenteNivel')?.value || 'secundaria';
+  const uso = document.getElementById('docenteUso')?.value || 'emocional';
+  const tiempo = document.getElementById('docenteTiempo')?.value || 'sesion';
+  const madurez = document.getElementById('docenteMadurez')?.value || 'suave';
+  const limit = tiempo === 'breve' ? 6 : tiempo === 'proyecto' ? 12 : 8;
+  const pool = catalog.filter(t => {
+    const levelOk = _docenteLevel(t).includes(nivel);
+    const useOk = uso === 'yokai' ? _docenteIsYokai(t) : String(t.uso || '').includes(uso);
+    const riskOk = madurez === 'abierta' || (madurez === 'media' ? true : !t.sensitive);
+    return levelOk && useOk && riskOk;
+  });
+  const fallback = catalog.filter(t => (uso === 'yokai' ? _docenteIsYokai(t) : String(t.uso || '').includes(uso)) && (madurez !== 'suave' || !t.sensitive));
+  const items = (pool.length ? pool : fallback).slice(0, limit);
+  box.innerHTML = items.map(_docenteCard).join('') || '<p class="docente-empty">No hay coincidencias suaves. Cambia madurez o propósito.</p>';
+  const summary = document.getElementById('docenteSummary');
+  if (summary) {
+    summary.textContent = `${items.length} títulos · ${DOCENTE_USO_LABELS[uso] || uso} · ${nivel} · ${madurez === 'suave' ? 'sin contenido sensible' : 'con revisión docente'}.`;
+  }
+}
+
+function applyDocenteRoute(routeId) {
+  const route = DOCENTE_RUTAS[routeId];
+  const box = document.getElementById('docenteResults');
+  if (!route || !box) return;
+  const items = route.titles.map(_docenteFind).filter(Boolean);
+  box.innerHTML = `<div class="ruta-selection-note"><strong>${escapeHtml(route.label)}</strong><span>${escapeHtml(route.note)}</span></div>` + items.map(item => _docenteCard(item, routeId === 'yokai' ? 'yokai' : undefined)).join('');
+  document.getElementById('selector-docente')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setCatalogMode('aula');
+}
+
+function setCatalogMode(mode) {
+  const isBiblioteca = mode === 'biblioteca';
+  const sec = document.getElementById('catalogo');
+  if (!sec) return;
+  catalogExpanded = isBiblioteca;
+  sec.classList.toggle('catalog-collapsed', !isBiblioteca);
+  document.body.classList.toggle('modo-biblioteca', isBiblioteca);
+  document.getElementById('modeAulaBtn')?.classList.toggle('active', !isBiblioteca);
+  document.getElementById('modeBibliotecaBtn')?.classList.toggle('active', isBiblioteca);
+  document.getElementById('modeAulaBtn')?.setAttribute('aria-pressed', String(!isBiblioteca));
+  document.getElementById('modeBibliotecaBtn')?.setAttribute('aria-pressed', String(isBiblioteca));
+  const btn = document.getElementById('exploreBtn');
+  if (btn) btn.textContent = isBiblioteca ? 'Cerrar modo biblioteca' : 'Abrir modo biblioteca';
+  if (isBiblioteca) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function initDocenteSelector() {
+  ['docenteNivel','docenteUso','docenteTiempo','docenteMadurez'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', renderDocenteSelector);
+  });
+  renderDocenteSelector();
+  setCatalogMode('aula');
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initDocenteSelector);
+} else {
+  initDocenteSelector();
+}
+
 // ══ CATÁLOGO — COLAPSO/EXPANSIÓN ════════════════════════════
-let catalogExpanded = true;  // FIX: catálogo visible por defecto
 
 function toggleCatalogExplore() {
-  catalogExpanded = !catalogExpanded;
-  const sec = document.getElementById('catalogo');
-  const btn = document.getElementById('exploreBtn');
-  if (catalogExpanded) {
-    sec.classList.remove('catalog-collapsed');
-    btn.textContent = 'Ocultar todos los títulos ↑';
-    btn.classList.add('expanded');
-  } else {
-    sec.classList.add('catalog-collapsed');
-    btn.textContent = 'Ver todos los títulos →';
-    btn.classList.remove('expanded');
-  }
+  setCatalogMode(catalogExpanded ? 'aula' : 'biblioteca');
 }
 
 // When user searches: show grid regardless of collapsed state
@@ -5981,10 +6160,7 @@ if (typeof filterUso === 'function') {
   filterUso = function(v) {
     __origFU(v);
     if (v !== 'all') {
-      document.getElementById('catalogo')?.classList.remove('catalog-collapsed');
-      catalogExpanded = true;
-      const btn = document.getElementById('exploreBtn');
-      if (btn) { btn.textContent = 'Ocultar todos ↑'; btn.classList.add('expanded'); }
+      setCatalogMode('biblioteca');
     }
   };
 }
@@ -5994,8 +6170,7 @@ if (typeof filterNivel === 'function') {
   filterNivel = function(v) {
     __origFN(v);
     if (v !== 'all') {
-      document.getElementById('catalogo')?.classList.remove('catalog-collapsed');
-      catalogExpanded = true;
+      setCatalogMode('biblioteca');
     }
   };
 }
@@ -13409,8 +13584,7 @@ function _renderEmocionResults(titles, emocion) {
     btn.addEventListener('click', () => {
       const uso = btn.dataset.uso;
       filterUso(uso);
-      // Expand catalog if collapsed
-      document.getElementById('catalogo')?.classList.remove('catalog-collapsed');
+      setCatalogMode('biblioteca');
       setTimeout(() => {
         document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
       }, 50);

@@ -3286,3 +3286,371 @@ button.gen-panel {
   margin-top: 0.6rem;
 }
 .sa-norm strong { color: var(--ink); }
+
+/* v5.35 — Selector docente: el fondo se abre por intención, no por volcado completo */
+.selector-docente {
+  width: min(1180px, calc(100% - 2rem));
+  margin: clamp(2rem, 5vw, 4.5rem) auto 2rem;
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+  border: 1px solid rgba(92, 62, 26, .22);
+  background:
+    linear-gradient(90deg, rgba(42,27,14,.08), transparent 34%),
+    linear-gradient(180deg, rgba(255,252,245,.98), rgba(246,239,224,.94));
+  box-shadow: 0 18px 50px rgba(48, 33, 12, .10);
+  position: relative;
+  overflow: hidden;
+}
+.selector-docente::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: .38rem;
+  background: linear-gradient(90deg, #8b1a1a, #9b6b20 34%, #2e6e3a 66%, #1a5a8b);
+}
+.selector-docente-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+  border-bottom: 1px solid rgba(92, 62, 26, .18);
+  padding-bottom: 1rem;
+}
+.selector-eyebrow,
+.ruta-tag {
+  display: inline-flex;
+  font: 700 .72rem/1 Inter, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #8b1a1a;
+}
+.selector-docente h2 {
+  margin: .35rem 0 .35rem;
+  font-family: "Shippori Mincho B1", serif;
+  font-size: clamp(1.8rem, 3.2vw, 3rem);
+  line-height: 1.04;
+  color: #261a10;
+}
+.selector-docente p {
+  margin: 0;
+  max-width: 68ch;
+  color: rgba(38,26,16,.75);
+}
+.catalog-mode-switch {
+  display: inline-flex;
+  gap: .35rem;
+  padding: .28rem;
+  border: 1px solid rgba(92, 62, 26, .22);
+  background: rgba(255,255,255,.65);
+}
+.catalog-mode-btn,
+.docente-secondary,
+.ruta-card button,
+.docente-actions button,
+.catalog-explore-btn {
+  min-height: 2.45rem;
+  border: 1px solid rgba(92, 62, 26, .24);
+  background: #fffaf0;
+  color: #2a1b0e;
+  font: 700 .82rem/1 Inter, sans-serif;
+  cursor: pointer;
+}
+.catalog-mode-btn {
+  padding: .55rem .85rem;
+}
+.catalog-mode-btn.active {
+  background: #2a1b0e;
+  color: #fff6df;
+}
+.docente-planner {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 1rem 0;
+}
+.docente-planner label {
+  display: grid;
+  gap: .35rem;
+  font: 700 .74rem/1.2 Inter, sans-serif;
+  text-transform: uppercase;
+  color: rgba(38,26,16,.68);
+}
+.docente-planner select {
+  width: 100%;
+  min-height: 2.7rem;
+  border: 1px solid rgba(92, 62, 26, .28);
+  background: #fff;
+  color: #24180d;
+  padding: 0 .75rem;
+  font: 600 .92rem/1.2 Inter, sans-serif;
+}
+.docente-results-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+  margin: 1.25rem 0 .8rem;
+}
+.docente-results-head h3 {
+  margin: 0 0 .2rem;
+  font-family: "Shippori Mincho B1", serif;
+  font-size: 1.35rem;
+}
+.docente-secondary,
+.ruta-card button,
+.docente-actions button,
+.catalog-explore-btn {
+  padding: .65rem .95rem;
+}
+.docente-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .75rem;
+}
+.docente-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 29rem;
+  border: 1px solid rgba(92, 62, 26, .18);
+  border-top: .32rem solid var(--docente-color, #7a5a0a);
+  background: rgba(255,255,255,.8);
+  padding: .85rem;
+  box-shadow: 0 10px 24px rgba(48,33,12,.07);
+}
+.docente-plate {
+  margin: -.85rem -.85rem .75rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #eadfcb;
+}
+.docente-plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(.95) contrast(1.03);
+}
+.docente-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: .5rem;
+  align-items: center;
+  font: 700 .68rem/1.1 Inter, sans-serif;
+  text-transform: uppercase;
+  color: rgba(38,26,16,.58);
+}
+.docente-card h4 {
+  margin: .7rem 0 .2rem;
+  font-family: "Shippori Mincho B1", serif;
+  font-size: 1.18rem;
+  line-height: 1.12;
+  color: #24180d;
+}
+.docente-autor {
+  min-height: 2.2rem;
+  font-size: .82rem;
+}
+.docente-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin: .55rem 0;
+}
+.docente-badges span {
+  padding: .22rem .42rem;
+  border: 1px solid rgba(92, 62, 26, .16);
+  background: rgba(246,239,224,.85);
+  font: 700 .68rem/1 Inter, sans-serif;
+}
+.decision-list {
+  display: grid;
+  gap: .45rem;
+  margin: .3rem 0 .8rem;
+}
+.decision-list div {
+  display: grid;
+  gap: .1rem;
+}
+.decision-list dt {
+  font: 800 .66rem/1 Inter, sans-serif;
+  text-transform: uppercase;
+  color: #8b1a1a;
+}
+.decision-list dd {
+  margin: 0;
+  color: rgba(38,26,16,.74);
+  font-size: .82rem;
+  line-height: 1.35;
+}
+.docente-actions {
+  display: flex;
+  gap: .45rem;
+  margin-top: auto;
+}
+.docente-actions button {
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: .76rem;
+}
+.rutas-docentes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: .75rem;
+  margin-top: 1rem;
+}
+.ruta-card {
+  border: 1px solid rgba(92, 62, 26, .18);
+  background: rgba(42,27,14,.04);
+  padding: .9rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 23rem;
+  box-shadow: 0 8px 22px rgba(48,33,12,.06);
+}
+.ruta-media {
+  margin: -.9rem -.9rem .8rem;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #eadfcb;
+}
+.ruta-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ruta-card h3 {
+  margin: .45rem 0 .35rem;
+  font-family: "Shippori Mincho B1", serif;
+  line-height: 1.12;
+}
+.ruta-card p {
+  min-height: 3.4rem;
+  font-size: .86rem;
+}
+.ruta-card button {
+  width: 100%;
+  margin-top: auto;
+  background: #2a1b0e;
+  color: #fff6df;
+}
+.yokai-visual-band {
+  display: grid;
+  grid-template-columns: minmax(220px, .9fr) repeat(2, minmax(190px, .65fr));
+  gap: .85rem;
+  align-items: stretch;
+  margin-top: 1rem;
+  padding: .85rem;
+  border: 1px solid rgba(92, 62, 26, .18);
+  background:
+    linear-gradient(135deg, rgba(255,250,240,.94), rgba(238,226,204,.88)),
+    radial-gradient(circle at 15% 10%, rgba(139,26,26,.12), transparent 30%);
+  box-shadow: 0 12px 28px rgba(48,33,12,.07);
+}
+.yokai-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: .75rem;
+}
+.yokai-copy h3 {
+  margin: .35rem 0 .55rem;
+  font-family: "Shippori Mincho B1", serif;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  line-height: 1.05;
+}
+.yokai-copy p {
+  margin: 0;
+  max-width: 34rem;
+  color: rgba(42,27,14,.72);
+  line-height: 1.45;
+}
+.yokai-visual-band figure {
+  margin: 0;
+  min-width: 0;
+  background: #fffaf0;
+  border: 1px solid rgba(92,62,26,.18);
+}
+.yokai-visual-band img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.yokai-visual-band figcaption {
+  padding: .55rem .65rem .65rem;
+  font-size: .72rem;
+  line-height: 1.35;
+  color: rgba(42,27,14,.72);
+}
+.ruta-selection-note {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .85rem 1rem;
+  border: 1px solid rgba(139,26,26,.24);
+  background: rgba(139,26,26,.06);
+}
+.docente-empty {
+  grid-column: 1 / -1;
+  padding: 1rem;
+  border: 1px solid rgba(139,26,26,.18);
+  background: rgba(255,255,255,.72);
+}
+.catalog-collapsed #explorerCounter,
+.catalog-collapsed .modo-aula-notice {
+  display: none;
+}
+.catalog-collapsed-banner {
+  background:
+    linear-gradient(90deg, rgba(42,27,14,.86), rgba(42,27,14,.68)),
+    url("../img/gw-cresta.jpg") center / cover;
+  color: #fff6df;
+}
+.catalog-collapsed-banner .ccb-eyebrow,
+.catalog-collapsed-banner .ccb-title,
+.catalog-collapsed-banner .ccb-body,
+.catalog-collapsed-banner .ccb-tip {
+  color: #fff6df;
+}
+.catalog-collapsed-banner .ccb-tip {
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.22);
+}
+.catalog-collapsed-banner .ccb-k {
+  background: #fff6df;
+  color: #2a1b0e;
+}
+.catalog-collapsed-banner .catalog-explore-btn {
+  background: #fff6df;
+  color: #2a1b0e;
+  border-color: rgba(255,255,255,.44);
+}
+
+@media (max-width: 960px) {
+  .selector-docente-head,
+  .docente-planner,
+  .docente-card-grid,
+  .rutas-docentes,
+  .yokai-visual-band {
+    grid-template-columns: 1fr 1fr;
+  }
+  .yokai-copy { grid-column: 1 / -1; }
+  .catalog-mode-switch {
+    justify-self: start;
+  }
+}
+@media (max-width: 640px) {
+  .selector-docente-head,
+  .docente-planner,
+  .docente-card-grid,
+  .rutas-docentes,
+  .yokai-visual-band {
+    grid-template-columns: 1fr;
+  }
+  .docente-results-head,
+  .ruta-selection-note {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
